@@ -1,0 +1,116 @@
+@StudentEnrollmentAPI_HostAddress = http://localhost:5078
+
+### Listar todos os alunos
+GET {{StudentEnrollmentAPI_HostAddress}}/api/students
+Accept: application/json
+
+###
+
+### Buscar aluno por ID
+GET {{StudentEnrollmentAPI_HostAddress}}/api/students/1
+Accept: application/json
+
+###
+
+### Criar novo aluno
+POST {{StudentEnrollmentAPI_HostAddress}}/api/students
+Content-Type: application/json
+
+{
+  "name": "Ana Carolina Silva",
+  "email": "ana.silva@email.com",
+  "ra": "RA004",
+  "cpf": "12312312312"
+}
+
+###
+
+### Criar aluno com CPF válido
+POST {{StudentEnrollmentAPI_HostAddress}}/api/students
+Content-Type: application/json
+
+{
+  "name": "Carlos Eduardo Santos",
+  "email": "carlos.santos@email.com",
+  "ra": "RA005",
+  "cpf": "11144477735"
+}
+
+###
+
+### Tentar criar aluno com RA duplicado (deve falhar)
+POST {{StudentEnrollmentAPI_HostAddress}}/api/students
+Content-Type: application/json
+
+{
+  "name": "Pedro Silva",
+  "email": "pedro.silva@email.com",
+  "ra": "RA001",
+  "cpf": "98798798798"
+}
+
+###
+
+### Tentar criar aluno com CPF inválido (deve falhar)
+POST {{StudentEnrollmentAPI_HostAddress}}/api/students
+Content-Type: application/json
+
+{
+  "name": "João Teste",
+  "email": "joao.teste@email.com",
+  "ra": "RA006",
+  "cpf": "12345678900"
+}
+
+###
+
+### Atualizar aluno (apenas Nome e Email)
+PUT {{StudentEnrollmentAPI_HostAddress}}/api/students/1
+Content-Type: application/json
+
+{
+  "name": "João Silva Atualizado",
+  "email": "joao.silva.novo@email.com"
+}
+
+###
+
+### Tentar atualizar com email já existente (deve falhar)
+PUT {{StudentEnrollmentAPI_HostAddress}}/api/students/1
+Content-Type: application/json
+
+{
+  "name": "João Silva",
+  "email": "maria.santos@email.com"
+}
+
+###
+
+### Excluir aluno
+DELETE {{StudentEnrollmentAPI_HostAddress}}/api/students/3
+Accept: application/json
+
+###
+
+### Tentar buscar aluno inexistente (deve retornar 404)
+GET {{StudentEnrollmentAPI_HostAddress}}/api/students/999
+Accept: application/json
+
+###
+
+### Tentar atualizar aluno inexistente (deve retornar 404)
+PUT {{StudentEnrollmentAPI_HostAddress}}/api/students/999
+Content-Type: application/json
+
+{
+  "name": "Teste",
+  "email": "teste@email.com"
+}
+
+###
+
+### Tentar excluir aluno inexistente (deve retornar 404)
+DELETE {{StudentEnrollmentAPI_HostAddress}}/api/students/999
+Accept: application/json
+
+###
